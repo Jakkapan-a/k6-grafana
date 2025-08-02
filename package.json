@@ -1,0 +1,27 @@
+{
+  "name": "k6-load-test",
+  "version": "1.0.0",
+  "description": "K6 Load Testing with InfluxDB and Grafana",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "restart": "docker-compose restart",
+    "logs": "docker-compose logs -f",
+    "test:simple": "docker-compose exec k6 k6 run simple-test.ts",
+    "test:load": "docker-compose exec k6 k6 run test.ts --out influxdb=http://influxdb:8086/k6",
+    "test:stress": "docker-compose exec k6 k6 run stress-test.ts --out influxdb=http://influxdb:8086/k6",
+    "test:simple-influx": "docker-compose exec k6 k6 run simple-test.ts --out influxdb=http://influxdb:8086/k6",
+    "compile": "tsc"
+  },
+  "keywords": ["k6", "load-testing", "performance", "influxdb", "grafana"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/k6": "^1.1.1"
+  },
+  "dependencies": {
+    "typescript": "^5.9.2"
+  }
+}
